@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>weather</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+    window.addEventListener('load', ()=>{
+      let long;
+      let lat;
+      let temp=document.querySelector("#temp")
+      let tempf=document.querySelector("#tempf")
+      let feels=document.querySelector("#feels")
+      let location=document.querySelector("h1")
+      let timezone=document.querySelector("#timezone")
+      let image=document.getElementById("image")
+      let feels2=document.querySelector("#feels2")
+      let temp2=document.querySelector("#temp2")
+      let image2=document.getElementById("image2")
+      let chance=document.querySelector("#chance")
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position=>{
+          long=position.coords.longitude;
+          lat=position.coords.latitude;
+          const api=`http://api.weatherapi.com/v1/forecast.json?key=df0058859b884b02af754250201105&q=${lat},${long}`
+          fetch(api)
+          .then(response=>{
+            return response.json();
+
+          })
+          .then(data=>{
+            const {temp_c,feelslike_c,is_day}=data.current;
+            const{text,code}=data.current.condition;
+            const{name,region,country,tz_id}=data.location;
+            const{avgtemp_c,daily_chance_of_rain}=data.forecast.forecastday[0].day;
+            const text2=data.forecast.forecastday[0].day.condition.text;
+            const code2=data.forecast.forecastday[0].day.condition.code;
+            temp.textContent=`Tempereture: ${temp_c}°C`;
+            tempf.textContent=`Feels like: ${feelslike_c}°C`;
+            timezone.innerHTML=tz_id;
+            feels.textContent=`Current: ${text}`;
+            location.innerHTML=`${name},${region}`;
+            temp2.textContent=`Tempereture: ${avgtemp_c}°C`;
+            chance.textContent=`Chances of rain: ${daily_chance_of_rain} %`;
+            feels2.textContent=`Forecast: ${text2}`;
+            if (is_day){
+              image.innerHTML=`<img src="static/images/icon/day/${code}.png"/>`;
+              image2.innerHTML=`<img src="static/images/icon/day/${code2}.png"/>`;
+            }
+            else{
+              image.innerHTML=`<img src="static/images/icon/night/${code}.png"/>`;
+              image2.innerHTML=`<img src="static/images/icon/night/${code2}.png"/>`;
+            }
+          });
+        });
+      }
+    });
+    </script>
+    <style>
+    h1{
+      color:white;
+      text-align:center;
+      font-family:"Times New Roman", Times, serif;
+    }
+    body{
+      background-color:#7395AE;
+    }
+    #image img {
+    display: block;
+    margin: 0 auto;
+    }
+    #image2 img{
+      display:block;
+      margin:0 auto;
+    }
+    #feels,#feels2,#temp2,#chance,#temp,#tempf,#weather,#timezone{
+      text-align: center;
+      color:#e9e8ed;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-family:"Times New Roman", Times, serif;
+    }
+
+    </style>
+    </head>
+  <body>
+    <h1> To get weather forecast please allow the location permision</h1>
+    <div id="feels">
+    </div>
+    <div id="image">
+    </div>
+    <div id="temp">
+    </div>
+    <div id="tempf">
+    </div>
+    <div id="feels2">
+    </div>
+    <div id="image2">
+    </div>
+    <div id="temp2">
+    </div>
+    <div id="chance">
+    </div>
+    <div id="timezone">
+    </div>
+    <br>
+    <br>
+    <div id="weather">
+      <a href="https://www.weatherapi.com/" title="Free Weather API"><img src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com" border="0"></a>
+    </div>
+  </body>
+</html>

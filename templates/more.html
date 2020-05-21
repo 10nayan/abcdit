@@ -1,0 +1,18 @@
+<!Doctype html>
+<html>
+<h1>This is more Page</h1>
+<body>
+	<h1> Hello {{user.first_name}}, I will show you magic, add anything to this list</h1>
+	<ul>
+	{%for note in notes%}
+		<li><p>{{note}}</p></li>
+	{%endfor%}
+	</ul>
+	<form action="{{url_for('more')}}" method='post'>
+	<a>Notes:</a><input type="text" name="note">
+	<button>Add note</button>
+	</form>
+
+	<p><a href="/">Go back to main page</a></p>
+</body>
+</html>
