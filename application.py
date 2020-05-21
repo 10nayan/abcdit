@@ -16,6 +16,7 @@ app.config["SQLALCHEMY_DATABASE_URI"]="postgresql://postgres:Nayan@123.@localhos
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
 Session(app)
 notes=[]
+data={'results1':"",'results2':"",'results3':'','results4':'','results5':''}
 db=SQLAlchemy(app)
 login=LoginManager(app)
 login.init_app(app)
@@ -95,16 +96,11 @@ def convert():
     currency = request.form.get("currency")
 
     res=requests.get("http://data.fixer.io/api/latest?access_key=5c0328116134b8ff2be7cb3103709f89&format=1",params={'symbols':currency})
-
-    # Make sure request succeeded
     if res.status_code != 200:
         return jsonify({"success": False})
-
-    # Make sure currency is in response
     data = res.json()
     if currency not in data["rates"]:
         return jsonify({"success": False})
-
     return jsonify({"success": True, "rate": data["rates"][currency]})
 @app.route("/weather")
 def weather():
@@ -128,26 +124,58 @@ def signout():
     logout_user()
     flash("You have logged out")
     return redirect(url_for('signin'))
-@app.route("/calculate",methods=["GET","POST"])
+@app.route("/calculate",methods=["GET"])
 def calculate():
-    results1=""
-    results2=""
-    if request.method=="POST":
-        a=request.form.get('a')
-        b=request.form.get('b')
-        c=request.form.get('c')
-        if a!=None:
-            results1=np.roots([a,b,c])
-        a1=request.form.get('a1')
-        b1=request.form.get('b1')
-        c1=request.form.get('c1')
-        a2=request.form.get('a2')
-        b2=request.form.get('b2')
-        c2=request.form.get('c2')
-        A=np.array([[a1,b1],[a2,b2]],dtype='float')
-        b=np.array([c1,c2],dtype='float')
-        if a1!=None:
-            results2=numpy.linalg.solve(A,b)
-    return render_template("calculate.html",results1=results1,results2=results2)
+    return render_template("calculate.html",data=data)
+@app.route("/calculate/quadratic",methods=["POST"])
+def quadratic():
+    a=request.form.get('a')
+    b=request.form.get('b')
+    c=request.form.get('c')
+    data['results1']=np.roots([a,b,c])
+    return render_template("calculate.html",data=data)
+@app.route("/calculate/linear",methods=["POST"])
+def Linear():
+    a1=request.form.get('a1')
+    b1=request.form.get('b1')
+    c1=request.form.get('c1')
+    a2=request.form.get('a2')
+    b2=request.form.get('b2')
+    c2=request.form.get('c2')
+    A=np.array([[a1,b1],[a2,b2]],dtype='float')
+    b=np.array([c1,c2],dtype='float')
+    data['results2']=numpy.linalg.solve(A,b)
+    return render_template("calculate.html",data=data)
+@app.route("/calculate/integrate",methods=["POST"])
+def integrate():
+    a2=request.form.get('a2')
+    b2=request.form.get('b2')
+    c2=request.form.get('c2')
+    d2=request.form.get('d2')
+    e2=request.form.get('e2')
+    array=np.array([a2,b2,c2,d2,e2],dtype='float')
+    data['results3']=np.polyint(array)
+    return render_template("calculate.html",data=data)
+@app.route("/calculate/differenciate",methods=["POST"])
+def differenciate():
+    a3=request.form.get('a3')
+    b3=request.form.get('b3')
+    c3=request.form.get('c3')
+    d3=request.form.get('d3')
+    e3=request.form.get('e3')
+    array=np.array([a3,b3,c3,d3,e3],dtype='float')
+    data['results4']=np.polyder(array)
+    return render_template("calculate.html",data=data)
+@app.route("/calculate/evaluate",methods=["POST"])
+def evaluate():
+    a4=request.form.get('a4')
+    b4=request.form.get('b4')
+    c4=request.form.get('c4')
+    d4=request.form.get('d4')
+    e4=request.form.get('e4')
+    x=request.form.get('x')
+    array=np.array([a4,b4,c4,d4,e4],dtype='float')
+    data['results5']=np.polyval(array,int(x))
+    return render_template("calculate.html",data=data)
 if __name__ == '__main__':
 	app.run(debug=True)
