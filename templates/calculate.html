@@ -2,62 +2,89 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>calculate</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
     <h1>Quadratic Equation</h1>
+    <h3>ax<sup>2</sup>+bx+c=0, a≠0</h3>
     <form id="form1" action="/calculate/quadratic" method="post">
-      <a>a:</a><input type="number" name="a">
-      <a>b:<a><input type="number" name="b">
-      <a>c:</a><input type="number" name="c">
-      <button>Calculate</button>
+      <div class="form-row">
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="a" placeholder="a"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="b" placeholder="b"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="c" placeholder="c"></div>
+    </div>
+      <button class="btn btn-primary">Calculate</button>
     </form>
+    <br>
     <div id='result1'>{{data['results1']}}</div>
     <hr>
     <h1>Linear Equation with two varriable </h1>
+    <h3>ax1+by1+c1=0,ax2+by2+c2=0</h3>
     <form id="form2" action="/calculate/linear" method="post">
-      <a>a1:</a><input type="number" name="a1">
-      <a>b1:<a><input type="number" name="b1">
-      <a>c1:</a><input type="number" name="c1">
-      <a>a2:</a><input type="number" name="a2">
-      <a>b2:<a><input type="number" name="b2">
-      <a>c2:</a><input type="number" name="c2">
-      <button>Calculate</button>
+      <div class="form-row">
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="a1"placeholder="a1"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="b1"placeholder="b1"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="c1"placeholder="c1"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="a2"placeholder="a2"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="b2"placeholder="b2"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="c2"placeholder="c2"></div>
+    </div>
+      <button class="btn btn-primary">Calculate</button>
     </form>
+    <br>
     <div id="results2">{{data['results2']}}</div>
     <hr>
     <h1>Integration</h1>
+    <h3>∫(ax<sup>5</sup>+bx<sup>4</sup>+cx<sup>3</sup>+dx<sup>2</sup>+ex+f)</h3>
   <form id="form3" action="/calculate/integrate" method="post">
-    <a>a:</a><input type="number" name="a2">
-    <a>b:<a><input type="number" name="b2">
-    <a>c:</a><input type="number" name="c2">
-    <a>d:</a><input type="number" name="d2">
-    <a>e:</a><input type="number" name="e2">
-    <button>Integrate</button>
+    <div class="form-row">
+    <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="a2"placeholder="a"></div>
+    <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="b2"placeholder="b"></div>
+    <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="c2"placeholder="c"></div>
+    <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="d2"placeholder="d"></div>
+    <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="e2"placeholder="e"></div>
+    <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="f2"placeholder="f"></div>
+  </div>
+    <button class="btn btn-primary">Integrate</button>
 </form>
+<br>
 <div id="results3">{{data['results3']}}</div>
 <hr>
   <h1>Differenciation</h1>
+  <h3> d/dx (ax<sup>5</sup>+bx<sup>4</sup>+cx<sup>3</sup>+dx<sup>2</sup>+ex+f)</h3>
   <form id="form4" action="/calculate/differenciate" method="post">
-    <a>a:</a><input type="number" name="a3">
-    <a>b:<a><input type="number" name="b3">
-    <a>c:</a><input type="number" name="c3">
-    <a>d:</a><input type="number" name="d3">
-    <a>e:</a><input type="number" name="e3">
-    <button>Differenciate</button>
+    <div class="form-row">
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="a3"placeholder="a"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="b3"placeholder="b"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="c3"placeholder="c"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="d3"placeholder="d"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="e3"placeholder="e"></div>
+      <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="f3"placeholder="f"></div>
+    </div>
+    <button class="btn btn-primary">Differenciate</button>
   </form>
+  <br>
     <div id="results4">{{data['results4']}}</div>
     <hr>
   <h1>Evaluate</h1>
+  <h3>(ax<sup>4</sup>+bx<sup>3</sup>+cx<sup>2</sup>+dx+e) at x</h3>
     <form id="form5" action="/calculate/evaluate" method="post">
-      <a>a:</a><input type="number" name="a4">
-      <a>b:<a><input type="number" name="b4">
-      <a>c:</a><input type="number" name="c4">
-      <a>d:</a><input type="number" name="d4">
-      <a>e:</a><input type="number" name="e4">
-      <a>x:</a><input type="number" name="x">
-      <button>Evaluate</button>
+      <div class="form-row">
+        <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="a4"placeholder="a"></div>
+        <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="b4"placeholder="b"></div>
+        <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="c4"placeholder="c"></div>
+        <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="d4"placeholder="d"></div>
+        <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="e4"placeholder="e"></div>
+        <div class="col-md-4 xs-4 mb-3"><input class="form-control" type="number" name="x"placeholder="x"></div>
+      </div>
+      <button class="btn btn-primary">Evaluate</button>
     </form>
+    <br>
       <div id="results5">{{data['results5']}}</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>
