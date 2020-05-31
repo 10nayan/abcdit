@@ -8,6 +8,7 @@ from models import *
 import requests
 import numpy as np
 import numpy.linalg
+from flask_socketio import SocketIO,send,emit
 app = Flask(__name__)
 app.secret_key="qwerty"
 app.config["SESSION_PERMANENT"]=False
@@ -15,6 +16,7 @@ app.config["SESSION_TYPE"]="filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"]="postgresql://postgres:Nayan@123.@localhost/postgres"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
 Session(app)
+socketio = SocketIO(app)
 notes=[]
 data={'results1':"",'results2':"",'results3':'','results4':'','results5':''}
 db=SQLAlchemy(app)
@@ -46,7 +48,7 @@ def signup():
         user=User(first_name=first_name,last_name=last_name,email=email,gender=gender,birthday=birthday,hash=hashed)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('signin'))
     return render_template("signup.html")
 @app.route("/signin",methods=["POST","GET"])
 def signin():
@@ -179,5 +181,22 @@ def evaluate():
     array=np.array([a4,b4,c4,d4,e4],dtype='float')
     data['results5']=np.polyval(array,int(x))
     return render_template("calculate.html",data=data)
+@app.route("/chat",methods=["GET","POST"])
+def chat():
+    if not current_user.is_authenticated:
+        flash("You have to login first")
+        return redirect(url_for('signin'))
+    name=current_user.first_name
+    return render_template("chat.html",name=name)
+@socketio.on('message')
+def handle_message(data):
+    print(data)
+    send(data)
+    emit('my_event','This task is also completed')
+@socketio.on('new_event')
+def handle_newevent(message):
+    print(message['name'])
+    message['time']=datetime.now().strftime("%I:%M %p")
+    emit('new_response',message,broadcast=True)
 if __name__ == '__main__':
-	app.run(debug=True)
+	socketio.run(app)
