@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>chat</title>
+  </head>
+    <body>
+      <h1>Chat</h1>
+      <div id="messages"></div>
+      <input id="input" type="text" placeholder="type here" >
+      <button id="submit" type="button" name="button">Send</button>
+      <script type="text/javascript">
+        const firstName=`{{name}}`;
+      </script>
+
+      <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="{{url_for('static',filename='scripts/chat.js')}}"></script>
+  </body>
+  </html>
