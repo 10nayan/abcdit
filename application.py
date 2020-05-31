@@ -19,6 +19,7 @@ Session(app)
 socketio = SocketIO(app)
 notes=[]
 data={'results1':"",'results2':"",'results3':'','results4':'','results5':''}
+users={}
 db=SQLAlchemy(app)
 login=LoginManager(app)
 login.init_app(app)
@@ -189,14 +190,14 @@ def chat():
     name=current_user.first_name
     return render_template("chat.html",name=name)
 @socketio.on('message')
-def handle_message(data):
-    print(data)
-    send(data)
+def handle_message(username):
+    users[username]=request.sid
+    send(username)
     emit('my_event','This task is also completed')
 @socketio.on('new_event')
 def handle_newevent(message):
-    print(message['name'])
+    receiver_session_id=users[message['receiver']]
     message['time']=datetime.now().strftime("%I:%M %p")
-    emit('new_response',message,broadcast=True)
+    emit('new_response',message,room=receiver_session_id)
 if __name__ == '__main__':
 	socketio.run(app)
