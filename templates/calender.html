@@ -1,0 +1,124 @@
+<!Doctype html>
+<html>
+<head>
+<title>Calender</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="{{url_for('static',filename='scripts/calender.js')}}"></script>
+<style>
+body{
+	background-color: #f5f5f5;
+}
+#calender1{
+position:fixed;
+text-align: center;
+top:20%;
+left:50%;
+transform:translate(-50%,-50%);width:300px;
+}
+h1{
+	font-size: 80px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+h3{
+	color:#808080;
+	font-size: 30px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.calender2{
+	background-color: cornflowerblue;
+	color:#fff;
+	border-radius: 5%;
+	box-shadow:0 4px 4px 0 rgba(50,50,50,0.4);
+}
+.calender2>p{
+	font-family: Verdana,Arial,sans-serif;
+	padding: 10px 0;
+	margin:0;
+	text-align: center;
+}
+.calender-day{
+	font-size: 16px;
+}
+.calender-month-year{
+	font-size: 14px;
+}
+.calender-date{
+	font-size: 64px;
+	padding-top: 10px;
+	padding-bottom: 0px;
+}
+
+
+</style>
+</head>
+<body>
+<div id="calender1">
+	<div id="day">
+	<h1 style="color:#7bf542;"> Sunday</h1>
+	</div>
+	<div id="date">
+		<h3>June 6</h3>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="form-row">
+	<div class="col-md-2 col-4 mb-3">
+		<div class="calender2">
+				<p class="calender-day" id="first-day"></p>
+				<p class="calender-date"id="first-date"></p>
+				<p class="calender-month" id="first-month"></p>
+		</div>
+	</div>
+<div class="col-md-2 col-4 mb-3">
+	<div class="calender2">
+			<p class="calender-day" id="second-day"></p>
+			<p class="calender-date"id="second-date"></p>
+			<p class="calender-month" id="second-month"></p>
+	</div>
+</div>
+<div class="col-md-2 col-4 mb-3">
+<div class="calender2">
+	<p class="calender-day" id="third-day"></p>
+	<p class="calender-date"id="third-date"></p>
+	<p class="calender-month" id="third-month"></p>
+</div>
+</div>
+<div class="col-md-2 col-4 mb-3">
+<div class="calender2">
+	<p class="calender-day" id="forth-day"></p>
+	<p class="calender-date"id="forth-date"></p>
+	<p class="calender-month" id="forth-month"></p>
+</div>
+</div>
+<div class="col-md-2 col-4 mb-3">
+<div class="calender2">
+	<p class="calender-day" id="fifth-day"></p>
+	<p class="calender-date"id="fifth-date"></p>
+	<p class="calender-month" id="fifth-month"></p>
+</div>
+</div>
+<div class="col-md-2 col-4 mb-3">
+<div class="calender2">
+	<p class="calender-day" id="sixth-day"></p>
+	<p class="calender-date"id="sixth-date"></p>
+	<p class="calender-month" id="sixth-month"></p>
+</div>
+</div>
+</div>
+<div class="d-flex justify-content-center">
+	<button type="button" class="btn btn-outline-secondary" onclick="window.location.href='/'">Back</button>
+</div>
+</body>
+</html>

@@ -4,6 +4,7 @@
     <title>weather</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script>
     window.addEventListener('load', ()=>{
       let long;
@@ -73,7 +74,7 @@
       display:block;
       margin:0 auto;
     }
-    #feels,#feels2,#temp2,#chance,#temp,#tempf,#weather,#timezone{
+    div{
       text-align: center;
       color:#e9e8ed;
       padding-top: 10px;
@@ -86,6 +87,8 @@
   <body>
     <h1> To get weather forecast please allow the location permision</h1>
     <div id="feels">
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Loading...
     </div>
     <div id="image">
     </div>
@@ -104,6 +107,9 @@
     <div id="timezone">
     </div>
     <br>
+    <div>
+    <button type="button" class="btn btn-primary" onclick="window.location.href='/'">Back</button>
+  </div>
     <br>
     <div id="weather">
       <a href="https://www.weatherapi.com/" title="Free Weather API"><img src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com" border="0"></a>

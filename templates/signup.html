@@ -7,25 +7,51 @@
   </head>
   <body>
     <h1>Register Here</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+        {%if category=='warning'%}
+        <div class="alert alert-warning" style="height:50px" role="alert">
+          <h5 class="text-center">{{ message }}</h5>
+        </div>
+        {%endif%}
+        {%if category=='danger'%}
+        <div class="alert alert-danger" style="height:50px" role="alert">
+          <h5 class="text-center">{{ message }}</h5>
+        </div>
+        {%endif%}
+        {%if category=='error'%}
+        <div class="alert alert-dark" style="height:50px" role="alert">
+          <h5 class="text-center">{{ message }}</h5>
+        </div>
+        {%endif%}
+        {%if category=='success'%}
+        <div class="alert alert-success" style="height:50px" role="alert">
+          <h5 class="text-center">{{ message }}</h5>
+        </div>
+        {%endif%}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <form action="{{url_for('signup')}}" method='post' class="needs-validation" novalidate>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">First name</label>
-          <input type="text" name=first_name class="form-control" id="validationCustom01" placeholder="Mark" required>
+          <input type="text" name=first_name class="form-control" id="validationCustom01" placeholder="Nagen" required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Last name</label>
-          <input type="text" name=last_name class="form-control" id="validationCustom02" placeholder="Otto" required>
+          <input type="text" name=last_name class="form-control" id="validationCustom02" placeholder="Barman" required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom03">Email</label>
-          <input type="email" name=email class="form-control" id="validationCustom03" placeholder="mark@gmail.com" required>
+          <input type="email" name=email class="form-control" id="validationCustom03" placeholder="nagen@gmail.com" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -41,7 +67,7 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom05">Enter Password Again</label>
-          <input type="password" class="form-control" id="validationCustom05" required>
+          <input type="password" name=password2 class="form-control" id="validationCustom05" required>
           <div class="invalid-feedback">
             Please provide a password.
           </div>

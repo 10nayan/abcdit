@@ -1,18 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+    <style>
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">ABCDit</a>
+  <a class="navbar-brand" href="home">ABCDit</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -33,15 +32,16 @@
           More
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="more">Notes</a>
-          <a class="dropdown-item" href="currency">Converter</a>
+          <a class="dropdown-item" href="calender">Calender</a>
+          <a class="dropdown-item" href="convert">Convert</a>
           <a class="dropdown-item" href="calculate">Calculate</a>
-          <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="weather">Weather</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="chat">Chat</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="signout">{{name}}</a>
+        <a id="disable" class="nav-link" >{{name}}</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -76,33 +76,87 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-    <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+<br>
+<div class="card-deck">
+  <div class="card">
+    <img src="{{url_for('static',filename='images/img_1.jpg')}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">First</h5>
+      <p class="card-text">Snow was falling, so much like stars filling the dark trees, that one could easily imagine its reason for being nothing more than prettiness.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Captured in Sikkim</small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{{url_for('static',filename='images/img_2.jpg')}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Second</h5>
+      <p class="card-text">The snow was endless, a heavy blanked on the outdoors, it had a way about it. A beauty but like many things, beauty could be deceiving.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Captured in Sikkim</small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{{url_for('static',filename='images/img_3.jpg')}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Third</h5>
+      <p class="card-text">The way up to the top of mountain is always longer then you think. The moment will arrive when what seemed so near is still so far.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Captured in Sikkim</small>
+    </div>
   </div>
 </div>
+<br>
 <div class="jumbotron">
   <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <p class="lead">This is a simple website,with different features like  calender, basic unit converter, mathematics calculation, live weather foreccast and chat application. To enjoy all features please create an account and feel free to connect with us.</p>
   <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  <p>To know more about this website click below.</p>
+  <a class="btn btn-primary btn-lg" href="about" role="button">Learn more</a>
 </div>
-
-    <br>
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<footer>
+  <div class="form-row">
+    <div class="col-md-4 col-4 mb-3">
+      <h2>Source code</h2>
+      <a href="https://github.com/10nayan/web_nayan">
+      <img src="{{url_for('static',filename='images/git.png')}}"  style="height:60px;width:60px;">
+    </a>
+    </div>
+    <div class="col-md-4 col-4 mb-3">
+      <h2>Follow me </h2>
+      <a href="https://twitter.com/Nayan10jp">
+      <img src="{{url_for('static',filename='images/twitter.png')}}"style="height:50px;width:50px;">
+      </a>
+    </div>
+    <div class="col-md-4 col-4 mb-3">
+      <h2> Connect me </h2>
+        <a href="https://www.linkedin.com/in/nayan-jyoti-patowary-7b0a97160/">
+      <img src="{{url_for('static',filename='images/linkedin.png')}}"style="height:50px;width:50px;">
+    </a>
+    </div>
+  </div>
+</footer>
+    <script>
+    var is_login=`{{current_user.is_authenticated}}`;
+    function disable_link(){
+      document.querySelector('#disable').disabled=true;
+      document.querySelector('#disable').removeAttribute('href');
+      document.querySelector('#disable').style.textDecoration='None';
+      document.querySelector('#disable').style.cursor='default';
+    }
+    function show_link(){
+      document.querySelector('#disable').disabled=false;
+      document.querySelector('#disable').href='signout';
+      document.querySelector('#disable').style.textDecoration='default';
+      document.querySelector('#disable').style.cursor='hand';
+    }
+    if (is_login=='True'){
+      show_link()
+    }
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
