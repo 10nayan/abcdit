@@ -1,0 +1,54 @@
+body{
+  background-color:#7395AE;
+}
+h1{
+  color:white;
+  text-align:center;
+  font-family:"Times New Roman", Times, serif;
+}
+.her_msg {
+  margin-right:7em;
+  margin-left: 1em;
+  padding: 0.5em 0.5em 0.5em 1em;
+  border-radius: 5px;
+  border-color: grey;
+  border-width: 0.5px;
+  border-style: solid;
+  background-color:#5680e9;
+  animation-name: fadeIn;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.my_msg {
+  margin-left:7em;
+  margin-right:1em;
+  padding: 0.5em 0.5em 0.5em 1em;
+  border-radius: 5px;
+  border-color: #206ED2;
+  border-width: 1px;
+  border-style: solid;
+  background-color:#ffffff;
+  animation-name: fadeIn;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.timestamp {
+  color: #656d78;
+  font-size:0.7em;
+}
+
+.her_username {
+  font-weight: bold;
+  font-size: 1.1em;
+  color:#ffffff;
+}
+
+.my_username {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #206ED2;
+}
