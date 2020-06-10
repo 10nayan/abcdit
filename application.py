@@ -11,11 +11,12 @@ import requests
 import numpy as np
 import numpy.linalg
 from flask_socketio import SocketIO,send,emit
+import os
 app = Flask(__name__)
-app.secret_key="qwerty"
+app.secret_key=os.environ.get('SECRET_KEY')
 app.config["SESSION_PERMANENT"]=False
 app.config["SESSION_TYPE"]="filesystem"
-app.config["SQLALCHEMY_DATABASE_URI"]="postgresql://postgres:Nayan@123.@localhost/postgres"
+app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 Session(app)
@@ -136,7 +137,7 @@ def search():
         return redirect(url_for('chat'))
     if search_input[0]=="c":
         return redirect(url_for('calender'))
-    return render_template("base.html")
+    return render_template("404.html")
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -250,4 +251,4 @@ def leave():
 def page_not_found(e):
     return render_template('404.html'), 404
 if __name__ == '__main__':
-	socketio.run(app,debug=True)
+	app.run()
