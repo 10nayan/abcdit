@@ -18,8 +18,6 @@ app.config["SESSION_TYPE"]="filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"]="postgresql://postgres:Nayan@123.@localhost/postgres"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-admin = Admin(app, name='admin-page', template_mode='bootstrap3')
-admin.add_view(ModelView(User, db.session))
 Session(app)
 socketio = SocketIO(app)
 notes=[]
@@ -31,6 +29,13 @@ login.init_app(app)
 @login.user_loader
 def user_loader(id):
     return User.query.get(int(id))
+class MyModelView(ModelView):
+    def is_accessible(self):
+        return current_user.email=='nayan.h4.aec@gmail.com'
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('signin', next=request.url))
+admin = Admin(app)
+admin.add_view(MyModelView(User, db.session))
 def validate_email(email):
     if email[-4::]=='.com' or email[-3::]=='.in':
         return True
@@ -106,14 +111,36 @@ def index():
     else:
         name="Guest"
     return render_template("base.html",name=name)
-@app.route("/search")
+@app.route("/search",methods=["GET","POST"])
 def search():
-    return render_template("search.html")
+    search_input=request.form.get('search_name').lower()
+    print(search_input)
+    if search_input[0]=="w":
+        return redirect(url_for('weather'))
+    if search_input[0]=="m":
+        return redirect(url_for('chat'))
+    if search_input[0]=="a":
+        return redirect(url_for('about'))
+    if search_input[0]=="h":
+        return redirect(url_for('home'))
+    if search_input[0]=="s":
+        if not current_user.is_authenticated:
+            flash(u"You haven't logged yet","error")
+            return redirect(url_for('signin'))
+        return redirect(url_for('signout'))
+    if search_input[0:3]=="cal":
+        return redirect(url_for('calculate'))
+    if search_input[0:2]=="co":
+        return redirect(url_for('convert'))
+    if search_input[0:2]=="ch":
+        return redirect(url_for('chat'))
+    if search_input[0]=="c":
+        return redirect(url_for('calender'))
+    return render_template("base.html")
 @app.route("/about")
 def about():
     return render_template("about.html")
 @app.route('/signout')
-@login_required
 def signout():
     logout_user()
     flash(u"You have logged out","success")
@@ -219,5 +246,8 @@ def handle_newevent(message):
 def leave():
     users.pop(current_user.email,None)
     return  redirect(url_for('index'))
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 if __name__ == '__main__':
 	socketio.run(app,debug=True)
