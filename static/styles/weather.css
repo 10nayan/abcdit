@@ -1,0 +1,23 @@
+h1{
+  color:white;
+  text-align:center;
+  font-family:"Times New Roman", Times, serif;
+}
+body{
+  background-color:#7395AE;
+}
+#image img {
+display: block;
+margin: 0 auto;
+}
+#image2 img{
+  display:block;
+  margin:0 auto;
+}
+div{
+  text-align: center;
+  color:#e9e8ed;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family:"Times New Roman", Times, serif;
+}
