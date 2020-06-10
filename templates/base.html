@@ -44,8 +44,8 @@
         <a id="disable" class="nav-link" >{{name}}</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="post">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_name">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
@@ -112,7 +112,7 @@
 <br>
 <div class="jumbotron">
   <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple website,with different features like  calender, basic unit converter, mathematics calculation, live weather foreccast and chat application. To enjoy all features please create an account and feel free to connect with us.</p>
+  <p class="lead">This is a simple website with different features like  calender, basic unit converter, mathematics calculation, live weather foreccast and chat application. To enjoy all features please create an account and feel free to connect with us.</p>
   <hr class="my-4">
   <p>To know more about this website click below.</p>
   <a class="btn btn-primary btn-lg" href="about" role="button">Learn more</a>
