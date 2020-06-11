@@ -19,12 +19,18 @@
       let temp2=document.querySelector("#temp2")
       let image2=document.getElementById("image2")
       let chance=document.querySelector("#chance")
-      if (navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(position=>{
-          long=position.coords.longitude;
-          lat=position.coords.latitude;
-          const api=`http://api.weatherapi.com/v1/forecast.json?key=df0058859b884b02af754250201105&q=${lat},${long}`
-          fetch(api)
+      const loc_api='https://ipinfo.io/geo?token=256c88609e90c4'
+      fetch(loc_api)
+       .then(response=> {
+         return response.json();
+       })
+       .then(data=>{
+        const loc = data.loc.split(',');
+        console.log(loc);
+        const lat= loc[0];
+        const long= loc[1];
+        const api=`https://api.weatherapi.com/v1/forecast.json?key=df0058859b884b02af754250201105&q=${lat},${long}`
+        fetch(api)
           .then(response=>{
             return response.json();
 
@@ -54,13 +60,12 @@
             }
           });
         });
-      }
     });
     </script>
     <link rel="stylesheet" href={{url_for('static',filename='styles/weather.css')}}>
     </head>
   <body>
-    <h1> To get weather forecast please allow the location permision</h1>
+    <h1>Please wait while we load Weather page for you </h1>
     <div id="feels">
   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
   Loading...
@@ -89,5 +94,8 @@
     <div id="weather">
       <a href="https://www.weatherapi.com/" title="Free Weather API"><img src='//cdn.weatherapi.com/v4/images/weatherapi_logo.png' alt="Weather data by WeatherAPI.com" border="0"></a>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>
