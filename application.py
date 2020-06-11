@@ -5,6 +5,7 @@ from flask_session import Session
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from datetime import datetime,date
+from pytz import timezone
 from passlib.hash import pbkdf2_sha256
 from models import *
 import requests
@@ -48,9 +49,10 @@ def home():
         name=current_user.first_name
     else:
         name=""
-    today=date.today()
-    d=today.strftime("%B %d %Y")
-    now=datetime.now().strftime("%I:%M %p")
+    tz_london=timezone('Europe/London')
+    tz_india=timezone('Asia/Kolkata')
+    now=datetime.now(tz_india).strftime("%I:%M %p")
+    d=datetime.now(tz_india).strftime("%B %d %Y")
     return render_template("home.html",name=name,today=d,now=now)
 @app.route("/signup",methods=["POST","GET"])
 def signup():
