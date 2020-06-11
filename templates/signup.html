@@ -35,21 +35,21 @@
     {% endwith %}
     <form action="{{url_for('signup')}}" method='post' class="needs-validation" novalidate>
       <div class="form-row">
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 col-12 mb-3">
           <label for="validationCustom01">First name</label>
           <input type="text" name=first_name class="form-control" id="validationCustom01" placeholder="Nagen" required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 col-12 mb-3">
           <label for="validationCustom02">Last name</label>
           <input type="text" name=last_name class="form-control" id="validationCustom02" placeholder="Barman" required>
           <div class="valid-feedback">
             Looks good!
           </div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 col-12 mb-3">
           <label for="validationCustom03">Email</label>
           <input type="email" name=email class="form-control" id="validationCustom03" placeholder="nagen@gmail.com" required>
           <div class="valid-feedback">
@@ -58,21 +58,21 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 col-12 mb-3">
           <label for="validationCustom04">Password</label>
           <input type="password" name=password class="form-control" id="validationCustom04" required>
           <div class="invalid-feedback">
             Please provide a password.
           </div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 col-12 mb-3">
           <label for="validationCustom05">Enter Password Again</label>
           <input type="password" name=password2 class="form-control" id="validationCustom05" required>
           <div class="invalid-feedback">
             Please provide a password.
           </div>
         </div>
-        <div class="col-md-2 mb-3">
+        <div class="col-md-2 col-6 mb-3">
           <label for="validationCustom06">Gender</label>
           <select class="custom-select" name=gender id="validationCustom06" required>
             <option selected disabled value="">Choose</option>
@@ -84,7 +84,7 @@
             Please choose any option
           </div>
         </div>
-        <div class="col-md-2 mb-3">
+        <div class="col-md-2 col-6 mb-3">
           <label for="validationCustom07">Birthday</label>
           <input type="date" name=birthday class="form-control" id="validationCustom07" required>
           <div class="invalid-feedback">
