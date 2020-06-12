@@ -2,7 +2,7 @@
 ## Introduction
 This website is built with flask which is a python micro-framework for web development.
 You can check out this website clicking here, https://abcdit.herokuapp.com
-This application has feature of a basic calender, a unit converter, a advanced mathematics calculator, a weather app and a chat app.
+This application has feature of basic calender, unit converter, advanced mathematics calculator, weather app and chat app.
 Any user can signup or register an account to this app and later login  or logout to their account, the user data is stored in postgreSQL database hosted in Heroku app.
 User password is stored after hashing so there is no security concern left behind, user other data such as first name or email is used in different features.
 This website is styled by using bootstrap CSS framework and all frontend logic is developed using vanilla javascript.
