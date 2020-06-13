@@ -1,5 +1,6 @@
-from flask import Flask,render_template,request,url_for,redirect,session,flash,jsonify
+from flask import Flask,render_template,request,url_for,redirect,session,flash,jsonify,abort
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import TimeoutError
 from flask_login import LoginManager,login_user,logout_user,login_required,current_user
 from flask_session import Session
 from flask_admin import Admin
@@ -20,6 +21,10 @@ app.config["SESSION_TYPE"]="filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+app.config['SQLALCHEMY_POOL_SIZE']=100
+app.config['SQLALCHEMY_MAX_OVERFLOW']=15
+app.config['SQLALCHEMY_POOL_TIMEOUT']=30
+app.config['SQLALCHEMY_POOL_RECYCLE']=1000
 Session(app)
 socketio = SocketIO(app)
 notes=[]
@@ -48,7 +53,7 @@ def home():
     if current_user.is_active:
         name=current_user.first_name
     else:
-        name=""
+        name=''
     tz_london=timezone('Europe/London')
     tz_india=timezone('Asia/Kolkata')
     now=datetime.now(tz_india).strftime("%I:%M %p")
@@ -74,9 +79,15 @@ def signup():
         if not validate_email(email):
             flash(u"Email not valid","error")
             return redirect(url_for('signup'))
-        user=User(first_name=first_name,last_name=last_name,email=email,gender=gender,birthday=birthday,hash=hashed)
-        db.session.add(user)
-        db.session.commit()
+        try:
+            user=User(first_name=first_name,last_name=last_name,email=email,gender=gender,birthday=birthday,hash=hashed)
+            db.session.add(user)
+            db.session.commit()
+        except TimeoutError:
+            db.session.rollback()
+            return render_template('500.html')
+        finally:
+            db.session.close()
         flash(u"You have registered successfully","success")
         return redirect(url_for('signin'))
     return render_template("signup.html")
@@ -237,20 +248,27 @@ def handle_newevent(message):
         receiver_session_id=users[message['receiver']]
         message['time']=datetime.now().strftime("%I:%M %p")
         emit('new_response',message,room=receiver_session_id)
-        print(users)
     except:
         message['name']="Server"
         message['msg']=message['receiver']+"  has left or not available"
         message['time']=datetime.now().strftime("%I:%M %p")
         emit('new_response',message)
-        print(users)
 @login_required
 @app.route("/chat/leave")
 def leave():
     users.pop(current_user.email,None)
     return  redirect(url_for('index'))
-@app.errorhandler(404)
+@app.errorhandler(408)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html'), 408
+@app.teardown_request
+def checkin_db(exc):
+    try:
+        db.session.remove()
+    except AttributeError:
+        pass
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
 if __name__ == '__main__':
-	app.run()
+	socket.run(app,debug=True)
