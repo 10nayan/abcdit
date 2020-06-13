@@ -271,4 +271,4 @@ def checkin_db(exc):
 def server_error(e):
     return render_template('500.html'), 500
 if __name__ == '__main__':
-	socket.run(app,debug=True)
+	app.run()
