@@ -74,7 +74,7 @@ else{
 document.getElementById('button7').onclick = () => {
   let a=document.getElementById("land").value;
   let b=document.getElementById("land-change").value;
-  if (b==0.16055846){
+  if (b==0.1606){
   document.getElementById("convert7").innerHTML=a+" bigha = "+a*b+" hectare";
 }
 else{
