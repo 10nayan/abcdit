@@ -21,7 +21,7 @@ app.config["SESSION_TYPE"]="filesystem"
 app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] =False
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-app.config['SQLALCHEMY_POOL_SIZE']=100
+app.config['SQLALCHEMY_POOL_SIZE']=25
 app.config['SQLALCHEMY_MAX_OVERFLOW']=15
 app.config['SQLALCHEMY_POOL_TIMEOUT']=30
 app.config['SQLALCHEMY_POOL_RECYCLE']=1000
@@ -83,7 +83,7 @@ def signup():
             user=User(first_name=first_name,last_name=last_name,email=email,gender=gender,birthday=birthday,hash=hashed)
             db.session.add(user)
             db.session.commit()
-        except TimeoutError:
+        except:
             db.session.rollback()
             return render_template('500.html')
         finally:
@@ -245,13 +245,15 @@ def handle_message(email):
 @socketio.on('new_event')
 def handle_newevent(message):
     try:
+	tz_india=timezone('Asia/Kolkata')
         receiver_session_id=users[message['receiver']]
-        message['time']=datetime.now().strftime("%I:%M %p")
+        message['time']=datetime.now(tz_india).strftime("%I:%M %p")
         emit('new_response',message,room=receiver_session_id)
     except:
+	tz_india=timezone('Asia/Kolkata')
         message['name']="Server"
         message['msg']=message['receiver']+"  has left or not available"
-        message['time']=datetime.now().strftime("%I:%M %p")
+        message['time']=datetime.now(tz_india).strftime("%I:%M %p")
         emit('new_response',message)
 @login_required
 @app.route("/chat/leave")
