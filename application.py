@@ -245,15 +245,13 @@ def handle_message(email):
 @socketio.on('new_event')
 def handle_newevent(message):
     try:
-	tz_india=timezone('Asia/Kolkata')
         receiver_session_id=users[message['receiver']]
-        message['time']=datetime.now(tz_india).strftime("%I:%M %p")
+        message['time']=datetime.now().strftime("%I:%M %p")
         emit('new_response',message,room=receiver_session_id)
     except:
-	tz_india=timezone('Asia/Kolkata')
         message['name']="Server"
         message['msg']=message['receiver']+"  has left or not available"
-        message['time']=datetime.now(tz_india).strftime("%I:%M %p")
+        message['time']=datetime.now().strftime("%I:%M %p")
         emit('new_response',message)
 @login_required
 @app.route("/chat/leave")
