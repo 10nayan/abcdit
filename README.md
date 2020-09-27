@@ -1,4 +1,14 @@
 # Basic feature app using Flask and deployed in Heroku
+<img src="screenshots/Screenshot (72).png">
+<img src="screenshots/Screenshot (73).png">
+<img src="screenshots/Screenshot (74).png">
+<img src="screenshots/Screenshot (75).png">
+<img src="screenshots/Screenshot (76).png">
+<img src="screenshots/Screenshot (77).png">
+<img src="screenshots/Screenshot (78).png">
+<img src="screenshots/Screenshot (79).png">
+<img src="screenshots/Screenshot (80).png">
+
 ## Introduction
 This website is built with flask which is a python micro-framework for web development.
 You can check out this website clicking here, https://abcdit.herokuapp.com
